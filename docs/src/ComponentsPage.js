@@ -4,6 +4,10 @@ import AutoAffix from 'react-overlays/lib/AutoAffix';
 import Nav from '../../src/Nav';
 import NavItem from '../../src/NavItem';
 
+import TabContainer from '../../src/TabContainer';
+import TabContent from '../../src/TabContent';
+import TabPane from '../../src/TabPane';
+
 import Anchor from './Anchor';
 import NavMain from './NavMain';
 import PageHeader from './PageHeader';
@@ -69,6 +73,9 @@ const ComponentsPage = React.createClass({
   },
 
   render() {
+    let tab = this.state.tab || 1;
+    let next = () => this.setState({ tab: ((tab + 1) > 3) ? 1 : tab + 1 });
+
     return (
         <div>
           <NavMain activePage="components" ref="topNav" />
@@ -76,7 +83,34 @@ const ComponentsPage = React.createClass({
           <PageHeader
             title="Components"
             subTitle="" />
+          <TabContainer defaultActiveKey={1} className="bs-example bs-example-tabs">
+            <Nav bsStyle="tabs" >
+              <NavItem eventKey={1}>
+                tab 1
+              </NavItem>
+              <NavItem eventKey={2}>
+                tab 2
+              </NavItem>
+              <NavItem eventKey={3}>
+                tab 3
+              </NavItem>
+            </Nav>
+            <TabContent animation={true}>
+              <TabPane eventKey={1}>
+                tab 1
+              </TabPane>
+              <TabPane eventKey={2}>
+                tab 2
+              </TabPane>
+              <TabPane eventKey={3}>
+                tab 3
+              </TabPane>
+            </TabContent>
+          </TabContainer>
+          <br />
 
+          <TabsSection />
+{/*
           <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
@@ -277,7 +311,7 @@ const ComponentsPage = React.createClass({
               </div>
             </div>
           </div>
-
+*/}
           <PageFooter ref="footer" />
         </div>
       );
